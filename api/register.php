@@ -27,10 +27,11 @@ if (strtolower($empId) === "admin") {
     exit();
 }
 $name = $data['Name'];
-$designation = $data['Designation'];
+$designation = $data['Designation']; 
 $password = password_hash($data['Password'], PASSWORD_BCRYPT);
 
-$stmt = $conn->prepare("INSERT INTO users (emp_id, name, email, password) VALUES (?, ?, ?, ?)");
+// Changed 'email' to 'department' to match your DB schema columns
+$stmt = $conn->prepare("INSERT INTO users (emp_id, name, department, password) VALUES (?, ?, ?, ?)");
 if (!$stmt) {
     echo json_encode(["success" => false, "message" => "Prepare failed: " . $conn->error]);
     exit();
